@@ -1,0 +1,96 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Mahasiswa {
+    String NIM;
+    String Nama;
+    List<Matkul> mataKuliahList;
+
+    public Mahasiswa(String NIM, String Nama) {
+        this.NIM = NIM;
+        this.Nama = Nama;
+        this.mataKuliahList = new ArrayList<>();
+    }
+    public void tambahMataKuliah(Matkul mataKuliah) {
+        mataKuliahList.add(mataKuliah);
+    }
+
+    public String getNim() {
+        return NIM;
+    }
+
+    public String getNama() {
+        return Nama;
+    }
+
+    public List<Matkul> getMataKuliahList() {
+        return mataKuliahList;
+    }
+}
+
+public class Matkul {
+    String kodeMK;
+    String namaMK;
+   double nilaiAngka;
+
+    public Matkul(String kodeMK, String namaMK, double nilaiAngka) {
+        this.kodeMK = kodeMK;
+        this.namaMK = namaMK;
+        this.nilaiAngka = nilaiAngka;
+    }
+
+    public String getKodeMK() {
+        return kodeMK;
+    }
+
+    public String getNamaMK() {
+        return namaMK;
+    }
+
+    public double getNilaiAngka() {
+        return nilaiAngka;
+    }
+
+    public String getNilaiHuruf() {
+        if (nilaiAngka >= 80) {
+            return "A";
+        } else if (nilaiAngka >= 70) {
+            return "B";
+        } else if (nilaiAngka >= 60) {
+            return "C";
+        } else if (nilaiAngka >= 50) {
+            return "D";
+        } else {
+            return "E";
+        }
+    } 
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Mahasiswa mahasiswa = new Mahasiswa("2315040711013", "Fariez Imaddin Aslam F");
+
+        mahasiswa.tambahMataKuliah(new Matkul("MK001", "Statistika", 85));
+        mahasiswa.tambahMataKuliah(new Matkul("MK002", "Pemograman Lanjut", 75));
+        mahasiswa.tambahMataKuliah(new Matkul("MK003", "PPB", 90));
+        mahasiswa.tambahMataKuliah(new Matkul("MK004", "DBD", 95));
+        mahasiswa.tambahMataKuliah(new Matkul("MK005", "Agama Islam", 65));
+
+
+
+        cetakKHS(mahasiswa);
+    }
+
+    public static void cetakKHS(Mahasiswa mahasiswa) {
+        System.out.println("KHS Mahasiswa:");
+        System.out.println("NIM: " + mahasiswa.getNim());
+        System.out.println("Nama: " + mahasiswa.getNama());
+        System.out.println("Mata Kuliah:");
+
+        for (Matkul mk : mahasiswa.getMataKuliahList()) {
+            System.out.println("- Kode MK: " + mk.getKodeMK());
+            System.out.println("  Nama MK: " + mk.getNamaMK());
+            System.out.println("  Nilai Huruf: " + mk.getNilaiHuruf());
+        }
+    }
+}
